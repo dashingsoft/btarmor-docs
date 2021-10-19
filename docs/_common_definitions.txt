@@ -1,0 +1,3 @@
+.. |Homepage| replace:: https://github.com/dashingsoft/bootarmor
+
+.. _issues: https://github.com/dashingsoft/bootarmor/issues/
