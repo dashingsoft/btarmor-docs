@@ -14,19 +14,17 @@ Bootarmor 是以提供绝对安全为目标的一种操作系统，基于 Linux�
 的用户（包括 root 在内）也无法读取。不管是静态反编译，还是动态调试，都无法获取安
 全应用的代码和数据。
 
-本文档适用于使用 Bootarmor 来保护自己应用程序的用户，包括基本安装步骤，快速入门
-和用户使用手册等内容。
+本文档适用于使用 Bootarmor 来保护自己应用程序的用户。
 
 内容:
 
 .. toctree::
    :maxdepth: 2
 
-   concepts
+   introduction
    installation
    tutorial
    handbook
-   specification
    appendix
 
 .. include:: _common_definitions.txt

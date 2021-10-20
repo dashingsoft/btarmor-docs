@@ -48,7 +48,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'bootarmor'
+project = 'Bootarmor'
 copyright = '2021 - 西安德新科技.'
 author = '赵俊德'
 
@@ -259,7 +259,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'bootarmor', 'Bootarmor 入门教程和用户手册',
+    (master_doc, 'Bootarmor', 'Bootarmor 入门教程和用户手册',
      [author], 1)
 ]
 
