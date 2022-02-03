@@ -22,16 +22,16 @@
 发布安全的动态库
 ----------------
 
-用户把一个动态库 `fa.so` 发布到安全环境的场景
+用户把一个动态库 `foo.so` 发布到安全环境的场景
 
-首先拷贝 `fa.so` 到树莓派，打开树莓派控制台，运行下面的命令::
+首先拷贝 `foo.so` 到树莓派，打开树莓派控制台，运行下面的命令::
 
-  btarmor fa.so
+  btarmor foo.so
 
-这样就会转换 `fo.so` 为安全动态库，然后就可以把这个动态库拷贝到系统库
+这样就会转换 `foo.so` 为安全动态库，然后就可以把这个动态库拷贝到系统库
 目录以供使用::
 
-  mv fa.so /usr/lib/
+  mv foo.so /usr/lib/
 
 发布安全的安装包
 ----------------
@@ -43,11 +43,11 @@
 
   btarmor foo.tar.gz
 
-默认会输出一个 `foo-armored.tar.gz` 安全安装包，然后删除老的包，解压安
+默认会输出一个 `foo.armored.tar.gz` 安全安装包，然后删除老的包，解压安
 全安装包到安装目录::
 
   rm foo.tar.gz
   mkdir -p /opt/foo
-  tar xzf foo-armored.tar.gz /opt/foo
+  tar xzf foo.armored.tar.gz /opt/foo
 
 .. include:: _common_definitions.txt
