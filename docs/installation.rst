@@ -3,12 +3,30 @@
 下载和安装
 ==========
 
+1. 安装命令行工具
+
+Bootarmor 提供了基本的命令行工具 :ref:`btarmor` ，目前支持 x86_64 和 aarch64 架构的 Linux 系统。
+
+下载地址
+
+https://btarmor.dashingsoft.com/downloads/tools/x86_64/btarmor.zip
+https://btarmor.dashingsoft.com/downloads/tools/aarch64/btarmor.zip
+
+或者直接使用下面的命令进行安装::
+
+  apt get btarmor
+
+2. 下载操作系统映像
+
+安装之后使用 `btarmor get` 命令下载最新的安全操作系统 btarmor-os::
+
+  btarmor get rasp-bi4
+
+下载完成之后会保存相应的文件到 `$HOME/downloads/bootarmor-os-0.1.1.img`
+
+3. 安装操作系统
+
 在 Linux 下安装 Bootarmor OS 到树莓派
--------------------------------------
-
-下载 Bootarmor OS
-
-https://bootarmor.dashingsoft.com/downloads/bootarmor-os-0.1.1.img
 
 把 SD 卡插入读写器，然后把读写器插入到 USB 接口，查看设备信息
 

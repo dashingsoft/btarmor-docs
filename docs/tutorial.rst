@@ -3,51 +3,28 @@
 
 下面以树莓派为例说明用户如何发布安全的应用
 
-首先参考 :ref:`下载和安装` 安装 Bootarmor OS 到树莓派
+1. 按照正常方式编译生成一个应用程序，包括可执行文件，动态库以及数据文
+   件等，保存在包 `foo-1.0.tar.gz` 里面。
 
-发布安全的可执行文件
---------------------
+2. 参考 :ref:`下载和安装` 安装 Bootarmor OS 到树莓派
 
-用户把一个应用程序 `foo` 发布到安全环境的场景
+3. 拷贝包到树莓派::
 
-首先拷贝 `foo` 到树莓派，打开树莓派控制台，运行下面的命令::
+       scp foo.tar.gz pi@raspberrypi.local
 
-  btarmor foo
+4. 在任意终端上执行命令，使用 ssh 方式进入树莓派控制台::
 
-这样就会转换 `foo` 为安全应用，然后就可以运行这个安全应用::
+       ssh pi@raspberrypi.local
 
-  mv foo /usr/bin/
-  foo
+   输入密码之后进入树莓派控制台，下面的命令均在树莓派控制台运行。
 
-发布安全的动态库
-----------------
+5. 使用命令行工具 :ref:`btarmor` 发布安全应用::
 
-用户把一个动态库 `foo.so` 发布到安全环境的场景
+       tar xzf foo-1.0.tar.gz
+       btarmor protect -i foo-1.0/
+       mv foo-1.0 /opt/foo
 
-首先拷贝 `foo.so` 到树莓派，打开树莓派控制台，运行下面的命令::
-
-  btarmor foo.so
-
-这样就会转换 `foo.so` 为安全动态库，然后就可以把这个动态库拷贝到系统库
-目录以供使用::
-
-  mv foo.so /usr/lib/
-
-发布安全的安装包
-----------------
-
-用户把包含可执行文件/动态库/数据文件的包 `foo.tar.gz` 发布到安全环境的
-场景
-
-首先拷贝 `foo.tar.gz` 到树莓派，打开树莓派控制台，运行下面的命令::
-
-  btarmor foo.tar.gz
-
-默认会输出一个 `foo.armored.tar.gz` 安全安装包，然后删除老的包，解压安
-全安装包到安装目录::
-
-  rm foo.tar.gz
-  mkdir -p /opt/foo
-  tar xzf foo.armored.tar.gz /opt/foo
+至此安全应用已经按照到 `/opt/foo` 下面，里面的所有文件，包括可执行文件，
+动态库以及数据文件都是受到保护的。
 
 .. include:: _common_definitions.txt
