@@ -35,4 +35,5 @@ Bootarmor 从系统引导开始接手，运行于芯片的最高权限级别，�
 
 Bootarmor 目前分为社区版和企业版两个版本。
 
+
 .. include:: _common_definitions.txt
