@@ -25,7 +25,7 @@ Bootarmor 提供了一个额外的命令行工具 `btarmor`_ ，用于转换应�
     make    创建 btarmor 保护的安全文件
     get     下载 btarmor-os 的系统映像
 
-可以运行 `pyarmor <command> -h` 查看各个命令的详细使用方法。
+可以运行 `btarmor <command> -h` 查看各个命令的详细使用方法。
 
 .. _make:
 
