@@ -79,7 +79,7 @@ make 子命令用于将命令行列出的一个或者多个文件转换成为安
 
 **示例**
 
-* 转换目录 ``foo`` 下面的所有文件，保存到 ``dist`` 目录::
+* 转换目录 ``foo`` 下面的所有文件，保存生成的安全文件到到默认输出目录 ``dist``::
 
     btarmor make foo/
 
@@ -125,9 +125,9 @@ get
 
     btarmor get --list
 
-* 下载树莓派 bi4 的系统映像::
+* 下载树莓派 pi4 的系统映像::
 
-    btarmor get rasp-bi4
+    btarmor get raspi4
 
 C 程序开发保护手册
 ------------------

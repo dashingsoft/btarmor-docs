@@ -20,7 +20,7 @@ https://btarmor.dashingsoft.com/downloads/tools/aarch64/btarmor.zip
 
 安装之后使用 `btarmor get` 命令下载最新的安全操作系统 btarmor-os::
 
-  btarmor get rasp-bi4
+  btarmor get raspi4
 
 下载完成之后会保存相应的文件到 `$HOME/downloads/bootarmor-os-0.1.1.img`
 

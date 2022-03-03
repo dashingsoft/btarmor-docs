@@ -29,9 +29,9 @@
 5. 在树莓派上发布安全应用到 ``/opt/foo``::
 
        mkdir -p /opt
-       tar xzf foo-armor-1.0.tar.gz /opt
+       tar xzf /home/pi/foo-armor-1.0.tar.gz /opt
 
-至此安全应用已经按照到 ``/opt/foo`` 下面，里面的所有文件，包括可执行文件，动态库
+至此安全应用已经按照到 ``/opt/foo-1.0`` 下面，里面的所有文件，包括可执行文件，动态库
 以及数据文件都是受到保护的。
 
 .. include:: _common_definitions.txt
