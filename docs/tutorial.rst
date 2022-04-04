@@ -26,6 +26,6 @@
 
      btamor make -i /opt/foo
 
-至此，安全应用 `/opt/foo` 已经受到保护，可以把树莓派发布给用户使用。
+至此，安全应用 ``/opt/foo`` 已经受到保护，可以把树莓派发布给用户使用。
 
 .. include:: _common_definitions.txt
