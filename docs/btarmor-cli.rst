@@ -1,14 +1,10 @@
-==================
+.. _btarmor:
+
  btarmor 命令手册
 ==================
 
 命令行工具 `btarmor`_ 的用户手册，适用于使用 `btarmor`_ 命令，需要了解
 其更多高级功能的用户。
-
-.. _btarmor:
-
-btarmor
-=======
 
 Bootarmor 提供了一个额外的命令行工具 `btarmor`_ ，用于转换应用程序为安全应用。
 
@@ -18,15 +14,15 @@ Bootarmor 提供了一个额外的命令行工具 `btarmor`_ ，用于转换应�
 
 常用的命令包括::
 
-    make    创建 btarmor 保护的安全文件
-    get     下载 btarmor-os 的系统映像
+    make    创建安全应用
+    sys     保护系统包
 
 可以运行 `btarmor <command> -h` 查看各个命令的详细使用方法。
 
-.. _make:
+.. _btmake:
 
-make
-----
+btmake
+------
 
 用于将可执行文件，动态库和数据文件等，转换成为 btarmor 保护的文件，转换后生成的
 文件是经过加密的，无法在普通系统中运行，只能在 btarmor-os 系统上运行。
@@ -36,8 +32,6 @@ make
     btarmor make <options> PATH...
 
     btmake <options> PATH...
-
-.. _make 命令选项:
 
 **选项**
 
@@ -86,38 +80,32 @@ make 子命令用于将命令行列出的一个或者多个文件转换成为安
 
     sudo btarmor make -i --share /usr/lib/*.so
 
-.. _get:
+.. _btsys:
 
-get
----
+btsys
+-----
 
-下载 btarmor 的系统映像，下载的映像可以被写入嵌入式系统的。
+检查系统当前所有安装包，并转换所有系统包为安全应用
 
 **语法**::
 
-    btarmor get <options> NAME
+    btarmor sys <options>
 
-    btget <options> NAME
-
-.. _get 命令选项:
+    btsys <options>
 
 **选项**
 
--l, --list			列出所有可用的系统映像名称
--t, --timeout SECONDS		如果下载的时候出现超时错误，设置该选项为较大的值
+-l, --list			列出系统所有安装的包的状态，是否被保护
 
 **描述**
 
-查看并下载可用的系统映像，下载的映像文件默认保存在用户目录的子目录 ``.btarmor/images``
+在安装安全系统内核 `btarmor-kernel` 之后，需要运行一次下面的命令，将系
+统所有的包转换成为安全应用::
 
-**示例**
+    btarmor sys
 
-* 列出当前所有的可用系统映像::
+查看当前系统安装包是否已经转换成为安全应用，可以使用下面的命令::
 
-    btarmor get --list
-
-* 下载树莓派 pi4 的系统映像::
-
-    btarmor get raspi4
+    btarmor sys -l
 
 .. include:: _common_definitions.txt
