@@ -1,37 +1,31 @@
 基本使用教程
 ============
 
-下面以树莓派为例说明用户如何发布安全的应用
+下面以树莓派为例说明用户如何使用 Bootarmor 发布和保护应用程序
 
-1. 按照正常方式编译生成一个应用程序，包括可执行文件，动态库以及数据文
-   件等，保存在包 ``foo-1.0.tar.gz`` 里面。
+1. 启动树莓派，然后修改 `/etc/apt/source.list` ，增加一行::
 
-2. 参考 :ref:`下载和安装` 在开发机器上安装命令行工具 :ref:`btarmor`
+     deb http://btarmor.dashingsoft.com/btarmor bullseye main
 
-3. 在开发机器上使用命令行工具 :ref:`btarmor` 创建安全应用::
+2. 在终端使用下面的命令安装安全操作系统内核::
 
-       tar xzf foo-1.0.tar.gz
-       btarmor make -i foo-1.0/
-       tar czf foo-armor-1.0.tar.gz foo-1.0/
+     sudo apt update
+     apt get btarmor-kernel
 
-4. 参考 :ref:`下载和安装` 安装 Bootarmor OS 到树莓派并启动树莓派
+3. 重新启动树莓派，现在已经是安全操作系统。
 
-5. 拷贝安全应用包到树莓派::
+4. 安装命令行工具 :ref:`btarmor`::
 
-       scp foo-armor-1.0.tar.gz pi@raspberrypi.local:/home/pi
+     apt get btarmor-cli
 
-6. 在任意终端上执行命令，使用 ssh 方式进入树莓派控制台::
+5. 转换系统应用和动态库为安全应用::
 
-       ssh pi@raspberrypi.local
+     btarmor sys
 
-   输入密码之后进入树莓派控制台，下面的命令均在树莓派控制台运行
+6. 转换被保护的应用程序 ``/opt/foo`` 为安全应用::
 
-5. 在树莓派上发布安全应用到 ``/opt/foo``::
+     btamor make -i /opt/foo
 
-       mkdir -p /opt
-       tar xzf /home/pi/foo-armor-1.0.tar.gz /opt
-
-至此安全应用已经按照到 ``/opt/foo-1.0`` 下面，里面的所有文件，包括可执行文件，动态库
-以及数据文件都是受到保护的。
+至此，安全应用 `/opt/foo` 已经受到保护，可以把树莓派发布给用户使用。
 
 .. include:: _common_definitions.txt

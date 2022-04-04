@@ -22,8 +22,8 @@ Bootarmor 是以提供绝对安全为目标的一种操作系统，基于 Linux�
    :maxdepth: 2
 
    introduction
-   installation
    tutorial
+   btarmor-cli
    handbook
    appendix
 
