@@ -7,20 +7,19 @@
 
      deb http://btarmor.dashingsoft.com/btarmor bullseye main
 
-2. 在终端使用下面的命令安装安全操作系统内核::
+2. 更新安装源::
 
      sudo apt update
-     apt get btarmor-kernel
 
-3. 重新启动树莓派，现在已经是安全操作系统。
-
-4. 安装命令行工具 :ref:`btarmor`::
+3. 安装命令行工具 :ref:`btarmor`::
 
      apt get btarmor-cli
 
-5. 转换系统应用和动态库为安全应用::
+4. 创建安全内核::
 
      btarmor sys
+
+5. 重新启动树莓派，现在已经是安全操作系统。
 
 6. 转换被保护的应用程序 ``/opt/foo`` 为安全应用::
 
