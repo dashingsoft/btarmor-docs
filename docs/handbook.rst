@@ -14,15 +14,15 @@
 * 数据段，存放全局变量和函数体内使用 ``static`` 声明的变量
 * 字符串常量
 * 内存堆，程序申请的内存
-* 内存栈，存放局部变量
+* 运行栈，存放局部变量
 * 数据文件
 
 受保护内存只允许应用程序本身访问，不允许任何外部访问，包括 Linux 内核，所以提供
 了最大限度的安全性。当然这样也意味在调用系统服务的时候，如果这些数据需要被内核访
 问，就需要进行一些额外的设置和处理。
 
-默认情况下，代码段，数据段，字符串常量和内存堆是被保护的，而内存栈和数据文件是
-没有被保护的。
+默认情况下，代码段，数据段，字符串常量是被保护的，而内存堆，运行栈和数据文件是没
+有被保护的。
 
 例如，在默认编译链接选项下面
 
@@ -191,51 +191,57 @@
 
    宏 ``BTS`` 和 ``BTPS/BTPE`` 都使用通过把数据拷贝到运行栈来实现和内核共享，如
    果应用程序使用 ``--safe-stack`` 对运行栈进行了保护，那么这些宏是无法共享数据
-   到内核的。在这种情况下，可以参考下面的 :ref:`共享内存堆` 的方式，把变量所在的
-   内存区域作为堆空间来进行共享。
+   到内核的。
 
-共享内存堆
+保护内存堆
 ==========
 
-如果内核需要访问内存堆中的数据，那么需要使用宏定义 ``BTPUB`` 实现对内核的共享。
-如果需要重新对内存堆进行保护，那么可以在使用完成之后调用宏 ``BTPRI`` 重新保护指
-定的内存堆空间。
+如果需要保护内存堆中的数据，有三种方式
 
-例如，
+1. 使用宏 ``BTMALLOC`` 分配空间，并使用 ``BTFREE`` 释放。例如，
 
 .. code:: c
-
-   #include <fcntl.h>
-   #include <stdio.h>
-   #include <stdlib.h>
 
    #include "btapp.h"
 
    int main(int argc, char *argv[])
    {
-       int fd;
        ssize_t len = 1024;
+       char *ps = (char*)BTMALLOC(len);
 
-       char *ps = (char*)malloc(len);
-       strncpy(ps, "data.txt", len);
+       ...
 
-       // 下面的语句中 open 会调用系统功能，Linux 内核会访问 *ps
-       // 而 *ps 是受到保护的， 不允许的内核访问，直接访问会出错
-
-       BTPUB(ps, len);
-       fd = open(ps, O_RDONLY);
-       BTPRI(ps, len);
-
-       if (fd > 0)
-           close(fd);
+       BTFREE(ps);
 
        return 0;
    }
 
 .. note::
 
-   使用 ``BTPUB`` 会以页面单位进行共享，起始地址分别会和页面对齐，所有地址范围之
-   内的页面都会被共享，所以可能会有额外的堆空间被共享。
+   使用 ``BTMALLOC`` 会以页面单位进行保护，起始地址分别会和页面对齐，所有地址范
+   围之内的页面都会被保护，所以可能会有额外的堆空间被保护。
+
+2. 通过包裹函数的方式，在源代码中增加两个函数
+
+.. code:: c
+
+    void *__wrap_malloc(size_t size)
+    {
+      return BTMALLOC(size);
+    }
+
+    void __wrap_free(void *ptr)
+    {
+      return BTFREE(ptr);
+    }
+
+然后，在编译的时候指定选项::
+
+    gcc -Wl,--wrap,malloc -Wl,--wrap,free foo.c
+
+3. 在生成安全应用的时候指定选项 ``--safe-heap``::
+
+    btarmor make --safe-heap myapp
 
 保护内存栈
 ==========
@@ -244,6 +250,10 @@
 用选项 ``--safe-stack``::
 
     btarmor make --safe-stack myapp
+
+.. note::
+
+   目前版本还没有实现该功能。
 
 保护数据文件
 ============

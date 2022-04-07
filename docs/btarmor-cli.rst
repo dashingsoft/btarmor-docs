@@ -18,10 +18,77 @@ Bootarmor 提供了一个命令行工具 `btarmor`_ ，用于转换内核和应�
 
 常用的命令包括::
 
+    boot    创建安全系统（开发模式）
     make    创建安全应用
-    sys     创建安全内核
+    deploy  发布安全系统（发布模式）
+    patch   下载安全内核的源代码补丁
 
 可以运行 `btarmor <command> -h` 查看各个命令的详细使用方法。
+
+btarmor boot
+------------
+
+用于安装开发模式的安全内核。
+
+**语法**::
+
+    btarmor boot [IMAGE]
+
+**描述**
+
+直接运行下面的命令安装开发模式的安全内核::
+
+    btarmor boot
+
+重新启动系统之后，其内核就已经是安全操作系统 `btarmor-os`_
+
+如果已经是安全内核，那么运行该命令则显示安全系统的相关信息。
+
+如果是定制的内核，那么需要在命令中指定内核映像，例如::
+
+    btarmor boot /path/to/Image
+
+btarmor deploy
+--------------
+
+用于安装发布模式的安全内核，该命令必须运行在开发模式的安全内核。
+
+**语法**::
+
+    btarmor deploy
+
+**描述**
+
+在产品准备交付给用户之前，在开发模式的安全内核上面运行该命令生成发布模式的安全内
+核。
+
+btarmor patch
+--------------
+
+下载安全内核的源代码补丁，用于定制自己的安全内核。
+
+**语法**::
+
+    btarmor patch <options> VERSION
+
+**选项**
+
+-O, --output PATH		保存到指定的文件，默认是标准输出
+-l, --list			列出所有可用版本的补丁名称
+
+**描述**
+
+直接下载和当前系统内核版本相同的补丁，保存到 `btarmor.patch`::
+
+  btarmor patch -O btarmor.patch
+
+下载指定内核版本 `5.10.73`::
+
+  btarmor patch -O btarmor.patch 5.10.73
+
+查看所有支持的内核版本的补丁::
+
+  btarmor patch --list
 
 .. _btmake:
 
@@ -47,7 +114,8 @@ btmake
 -i, --inplace			生成的文件直接覆盖原来的文件
 -O, --output PATH		生成的文件保存在另外一个路径，默认是 `dist`
 --share				使用共享模式进行保护，一般用于保护系统动态库和允许内核访问的文件
--ss, --safe-stack               保护运行栈（局部变量）
+-sh, --safe-heap		不允许内核访问应用程序申请的堆空间
+-ss, --safe-stack               不允许内核访问运行栈（局部变量）
 
 **描述**
 
@@ -89,27 +157,5 @@ make 子命令用于将命令行列出的一个或者多个文件转换成为安
 
     sudo btarmor make -i --share /usr/lib/*.so
 
-.. _btsys:
-
-btsys
-=====
-
-用于创建和安装安全内核。
-
-**语法**::
-
-    btarmor sys <options>
-
-    btsys <options>
-
-**描述**
-
-直接运行下面的命令创建安全内核::
-
-    btarmor sys
-
-重新启动系统之后，其内核就已经是安全操作系统 `btarmor-os`_
-
-如果已经是安全内核，那么运行该命令则显示安全系统的相关信息。
 
 .. include:: _common_definitions.txt
