@@ -90,6 +90,10 @@ btarmor patch
 
   btarmor patch --list
 
+也可以从下面的链接查看和下载对应版本的 `btarmor-os`_ 补丁
+
+    https://btarmor.dashingsoft.com/kernel/patches/
+
 .. _btmake:
 
 btmake
@@ -113,7 +117,7 @@ btmake
 
 -i, --inplace			生成的文件直接覆盖原来的文件
 -O, --output PATH		生成的文件保存在另外一个路径，默认是 `dist`
---share				使用共享模式进行保护，一般用于保护系统动态库和允许内核访问的文件
+-sys, --share			使用共享模式进行保护，一般用于保护系统动态库和允许内核访问的文件
 -sh, --safe-heap		不允许内核访问应用程序申请的堆空间
 -ss, --safe-stack               不允许内核访问运行栈（局部变量）
 
@@ -130,7 +134,9 @@ make 子命令用于将命令行列出的一个或者多个文件转换成为安
 
 如果指定了选项 ``--inplace`` ，那么输出文件会直接覆盖原来的文件。
 
-选项 ``--share`` 一般用于加密系统动态库，使用该选项加密的文件允许内核访问。
+选项 ``-sys`` 一般用于加密系统动态库，使用该选项加密的文件允许内核访问。如果使用
+该选项加密可执行文件，那么这个可执行文件也只能运行在应用程序层。主要是为了让一些
+系统命令可以在发布模式下面执行。
 
 选项 ``--safe-stack`` 用于保护运行栈，这里面一般是程序的调用框架和局部变量，默认
 情况下是允许内核访问的。如果这些数据不需要被内核访问，使用该选项可以提高安全性。
@@ -157,5 +163,8 @@ make 子命令用于将命令行列出的一个或者多个文件转换成为安
 
     sudo btarmor make -i --share /usr/lib/*.so
 
+* 加密系统命令 `ls`::
+
+    sudo btarmor make -i -sys /usr/bin/ls
 
 .. include:: _common_definitions.txt
