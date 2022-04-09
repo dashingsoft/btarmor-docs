@@ -1,4 +1,4 @@
 .. |Homepage| replace:: https://github.com/dashingsoft/bootarmor
 
 .. _issues: https://github.com/dashingsoft/bootarmor/issues/
-.. _btarmor-os: 使用安全内核 btarmor-kernel 的 Linux 系统
+.. _btarmor-os: :ref:`btarmor-os`
