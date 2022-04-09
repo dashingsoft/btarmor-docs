@@ -18,17 +18,19 @@ Bootarmor 提供了一个命令行工具 `btarmor`_ ，用于转换内核和应�
 
 常用的命令包括::
 
-    boot    创建安全系统（开发模式）
+    boot    安装安全系统
     make    创建安全应用
-    deploy  发布安全系统（发布模式）
+    deploy  发布安全应用
     patch   下载安全内核的源代码补丁
 
 可以运行 `btarmor <command> -h` 查看各个命令的详细使用方法。
 
-btarmor boot
-------------
+.. _boot:
 
-用于安装开发模式的安全内核。
+boot
+====
+
+用于安装安全操作系统 `btarmor-os`
 
 **语法**::
 
@@ -36,63 +38,21 @@ btarmor boot
 
 **描述**
 
-直接运行下面的命令安装开发模式的安全内核::
+如果没有对内核进行定制，那么直接运行下面的命令安装 `btarmor-os`::
 
-    btarmor boot
+  btarmor boot
+
+如果是对内核进行了定制，那么需要下载相应内核版本的补丁::
+
+  btarmor patch -O btarmor-os.patch
+
+在源文件目录应用该补丁文件，重新生成 Linux 内核，在命令行中指定新的内核文件名称::
+
+  sudo btarmor boot /PATH/TO/IMAGE
 
 重新启动系统之后，其内核就已经是安全操作系统 `btarmor-os`_
 
 如果已经是安全内核，那么运行该命令则显示安全系统的相关信息。
-
-如果是定制的内核，那么需要在命令中指定内核映像，例如::
-
-    btarmor boot /path/to/Image
-
-btarmor deploy
---------------
-
-用于安装发布模式的安全内核，该命令必须运行在开发模式的安全内核。
-
-**语法**::
-
-    btarmor deploy
-
-**描述**
-
-在产品准备交付给用户之前，在开发模式的安全内核上面运行该命令生成发布模式的安全内
-核。
-
-btarmor patch
---------------
-
-下载安全内核的源代码补丁，用于定制自己的安全内核。
-
-**语法**::
-
-    btarmor patch <options> VERSION
-
-**选项**
-
--O, --output PATH		保存到指定的文件，默认是标准输出
--l, --list			列出所有可用版本的补丁名称
-
-**描述**
-
-直接下载和当前系统内核版本相同的补丁，保存到 `btarmor.patch`::
-
-  btarmor patch -O btarmor.patch
-
-下载指定内核版本 `5.10.73`::
-
-  btarmor patch -O btarmor.patch 5.10.73
-
-查看所有支持的内核版本的补丁::
-
-  btarmor patch --list
-
-也可以从下面的链接查看和下载对应版本的 `btarmor-os`_ 补丁
-
-    https://btarmor.dashingsoft.com/kernel/patches/
 
 .. _btmake:
 
@@ -171,5 +131,56 @@ make 子命令用于将命令行列出的一个或者多个文件转换成为安
 * 加密系统命令 ``ls``::
 
     sudo btarmor make -i -sys /usr/bin/ls
+
+.. _deploy:
+
+deploy
+======
+
+用于产品开发完成之后，发布运行安全应用的系统到最终用户。
+
+**语法**::
+
+    btarmor deploy
+
+**描述**
+
+在产品准备交付给用户之前，在 `btarmor-os` 上面把应用程序和相关的系统库转换称为安
+全应用，然后运行这个命令切换到发布模式。
+
+.. _patch:
+
+patch
+=====
+
+下载安全内核的源代码补丁，用于定制自己的安全内核。
+
+**语法**::
+
+    btarmor patch <options> VERSION
+
+**选项**
+
+-O, --output PATH		保存到指定的文件，默认是标准输出
+-l, --list			列出所有可用版本的补丁名称
+
+**描述**
+
+直接下载和当前系统内核版本相同的补丁，保存到 `btarmor.patch`::
+
+  btarmor patch -O btarmor.patch
+
+下载指定内核版本 `5.10.73`::
+
+  btarmor patch -O btarmor.patch 5.10.73
+
+查看所有支持的内核版本的补丁::
+
+  btarmor patch --list
+
+也可以从下面的链接查看和下载对应版本的 `btarmor-os`_ 补丁
+
+    https://btarmor.dashingsoft.com/kernel/patches/
+
 
 .. include:: _common_definitions.txt
