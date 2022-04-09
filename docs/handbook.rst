@@ -196,9 +196,9 @@
 保护内存堆
 ==========
 
-如果需要保护内存堆中的数据，有三种方式
+如果需要保护内存堆中的数据，可以使用下面的方式
 
-1. 使用宏 ``BTMALLOC`` 分配空间，并使用 ``BTFREE`` 释放。例如，
+1. 使用宏 ``mmap`` 分配空间，并使用 ``MAP_BTMDATA`` 标志。例如，
 
 .. code:: c
 
@@ -207,37 +207,36 @@
    int main(int argc, char *argv[])
    {
        ssize_t len = 1024;
-       char *ps = (char*)BTMALLOC(len);
+       char *ps = (char*)mmap(
+           0,
+           len,
+           PROT_READ | PROT_WRITE,
+           MAP_PRIVATE | MAP_MDATA,
+           -1,
+           0);
 
        ...
 
-       BTFREE(ps);
-
+       munmap(ps, len);
        return 0;
    }
 
-.. note::
-
-   使用 ``BTMALLOC`` 会以页面单位进行保护，起始地址分别会和页面对齐，所有地址范
-   围之内的页面都会被保护，所以可能会有额外的堆空间被保护。
-
-2. 通过包裹函数的方式，在源代码中增加两个函数
+2. 使用宏 ``BTMMAP`` 分配空间。例如，
 
 .. code:: c
 
-    void *__wrap_malloc(size_t size)
-    {
-      return BTMALLOC(size);
-    }
+   #include "btapp.h"
 
-    void __wrap_free(void *ptr)
-    {
-      return BTFREE(ptr);
-    }
+   int main(int argc, char *argv[])
+   {
+       ssize_t len = 1024;
+       char *ps = (char*)BTMMAP(len);
 
-然后，在编译的时候指定选项::
+       ...
 
-    gcc -Wl,--wrap,malloc -Wl,--wrap,free foo.c
+       munmap(ps, len);
+       return 0;
+   }
 
 3. 在生成安全应用的时候指定选项 ``--safe-heap``::
 
@@ -250,10 +249,6 @@
 用选项 ``--safe-stack``::
 
     btarmor make --safe-stack myapp
-
-.. note::
-
-   目前版本还没有实现该功能。
 
 保护数据文件
 ============
