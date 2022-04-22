@@ -1,24 +1,34 @@
 基本使用教程
 ============
 
-Bootarmor 支持在 Debian Linux 中直接安装一个新的安全内核，重新启动之后就可以将原
-来的系统升级成为可以运行安全应用的操作系统。
+Bootarmor 支持在原来的 Debian Linux （例如 Ubutnu 或者 RaspberryOS）中直接安装新
+的安全内核，重新启动之后就可以将原来的系统升级成为可以运行安全应用的操作系统。
 
-安装命令行工具
-----------------
+Bootarmor 提供了命令行工具 :ref:`btarmor` ，可以帮助用户完成大部分的功能。
 
-1. 修改 `/etc/apt/source.list` ，增加一行::
+安装命令行工具 btarmor
+----------------------
 
-     deb https://btarmor.dashingsoft.com/btarmor bullseye main
+启动任意 Debian Linux 系统之后，使用下面的方式增加安装源之后，就可以使用常用的管
+理命令 `apt` 命令安装 Bootarmor 提供的各种包::
 
-2. 更新安装源::
+    wget -O - https://btarmor.dashingsoft.com/apt/debian/dashingsoft-btarmor.gpg \
+         | sudo apt-key add -
 
-     sudo apt update
+    sudo echo "https://btarmor.dashingsoft.com/apt/debian bullseye contrib" \
+              > /etc/apt/sources.list.d/btarmor.list
 
-3. 安装命令行工具 :ref:`btarmor`::
+    sudo apt update
 
-     apt get btarmor-cli
+命令行工具 :ref:`btarmor` 在包 `btarmor-cli` 中，使用下面的命令直接安装::
 
+    sudo apt install btarmor-cli
+
+查看命令 :ref:`btarmor` 是否安装成功::
+
+    btarmor -v
+
+安装成功的话，会显示相关的版本信息。
 
 安装安全操作系统
 ----------------

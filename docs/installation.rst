@@ -3,6 +3,15 @@
 下载和安装
 ==========
 
+Bootarmor 提供了命令行工具包 `btarmor`_ 。这是一个 Python 开发的工具包，
+首先安装 `pip`_
+
+，https://packaging.python.org/en/latest/guides/installing-using-linux-tools/
+
+然后直接运行下面的命令::
+
+    pip install btarmor
+
 1. 安装命令行工具
 
 Bootarmor 提供了基本的命令行工具 :ref:`btarmor` ，目前支持 x86_64 和 aarch64 架构的 Linux 系统。
