@@ -8,7 +8,9 @@ btarmor
 语法
 ----
 
-btarmor <command> [options]
+.. code-block:: console
+
+    btarmor <command> [options]
 
 描述
 ----
@@ -31,13 +33,14 @@ btarmor <command> [options]
 btarmor boot
 ------------
 
-字命令 ``boot`` 用于安装安全操作系统 `btarmor-os`_
+子命令 ``boot`` 用于安装安全操作系统 `btarmor-os`_
 
-直接运行下面的命令会安装新的内核，一般用于初始化安全操作系统::
+直接运行下面的命令会安装新的内核，这个命令需要使用 ``root`` 权限，一般用于初始化
+安全操作系统::
 
     sudo btarmor boot
 
-这个命令会安装新的内核，所以需要使用 `sudo` 获得 root 权限
+安装完成之后需要重启才能生效。
 
 重新启动系统之后，其内核就已经是安全操作系统 `btarmor-os`_
 
@@ -50,7 +53,7 @@ btarmor boot
 btarmor make
 ------------
 
-字命令 ``make`` 用于将可执行文件，动态库和数据文件等，转换成为 Bootarmor 保护的
+子命令 ``make`` 用于将可执行文件，动态库和数据文件等，转换成为 Bootarmor 保护的
 安全文件，转换后生成的文件是经过加密处理的，只能在 `btarmor-os`_ 系统上运行。
 
 `btmake`_ 可以运行在 `btarmor-os`_ 系统，直接将应用程序转换成为安全应用。
@@ -61,7 +64,9 @@ btarmor make
 语法
 ~~~~
 
-btarmor make <options> <PATH | tar | deb>
+.. code-block:: console
+
+    btarmor make <options> <PATH | tar | deb>
 
 选项
 ~~~~
@@ -77,7 +82,7 @@ btarmor make <options> <PATH | tar | deb>
 描述
 ~~~~
 
-make 子命令用于将命令行列出的一个或者多个文件转换成为安全文件，如果列出的是目录，
+子命令 make 用于将命令行列出的一个或者多个文件转换成为安全文件，如果列出的是目录，
 那么会递归处理目录下面的所有可执行文件和动态库。
 
 例如::
@@ -169,7 +174,9 @@ btarmor deploy
 
 语法
 ~~~~
-::
+
+.. code-block:: console
+
     btarmor deploy <options>
 
 选项
@@ -202,7 +209,9 @@ btarmor patch
 
 语法
 ~~~~
-::
+
+.. code-block:: console
+
     btarmor patch <options> VERSION
 
 选项
