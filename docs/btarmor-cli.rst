@@ -35,14 +35,12 @@ btarmor boot
 
 子命令 ``boot`` 用于安装安全操作系统 `btarmor-os`_
 
-直接运行下面的命令会安装新的内核，这个命令需要使用 ``root`` 权限，一般用于初始化
-安全操作系统::
+直接运行下面的命令会安装新的安全内核，这个命令需要使用 ``root`` 权限，一般用于初
+始化安全操作系统::
 
     sudo btarmor boot
 
-安装完成之后需要重启才能生效。
-
-重新启动系统之后，其内核就已经是安全操作系统 `btarmor-os`_
+安装完成之后需要重启系统。重新启动之后，内核就升级成为安全操作系统 `btarmor-os`_
 
 下面的命令则显示安全系统的相关信息::
 
@@ -66,7 +64,7 @@ btarmor make
 
 .. code-block:: console
 
-    btarmor make <options> <PATH | tar | deb>
+    btarmor make <options> <PATTERN>
 
 选项
 ~~~~
@@ -76,51 +74,31 @@ btarmor make
 -sys, --share			使用共享模式进行保护，一般用于保护系统动态库
 -sh, --safe-heap		不允许内核访问应用程序申请的堆空间
 -ss, --safe-stack               不允许内核访问运行栈（局部变量）
---exact, --no-deps		不自动处理ELF文件的依赖库
 -f FILE				从文件里面读取需要处理的文件名称
 
 描述
 ~~~~
 
-子命令 make 用于将命令行列出的一个或者多个文件转换成为安全文件，如果列出的是目录，
-那么会递归处理目录下面的所有可执行文件和动态库。
+子命令 make 用于将命令行列出的一个或者多个文件转换成为安全文件，可以使用通配符。
 
 例如::
 
-    btarmor make /home/jondy/myapp
-
-如果文件是一个压缩包，那么压缩包会作为解压后的一个目录进行处理。
-
-这个命令会递归加密 myapp 目录下面的所有可执行文件和动态库，对于可执行文件所依赖
-的系统动态库，也会使用共享模式进行加密处理。如果不需要处理系统动态库，使用选项
-``--no-deps`` ，例如::
-
-    btarmor make --no-deps /home/jondy/myapp
-
-如果需要处理数据文件，可以在命令行直接列出，例如::
-
-    btarmor make --no-deps /home/jondy/myapp /home/jondy/myapp/config.txt
+    cd /home/jondy/myapp
+    btarmor make foo *.so config.txt
 
 还可以把所有需要处理的文件名称都存放到一个文件里面，例如 ``files.list`` ::
 
-    /home/jondy/myapp/foo
-    /home/jondy/myapp/libtoo.so
-    /home/jondy/myapp/config.txt
+    foo
+    libtoo.so
+    config.txt
 
 然后在命令行使用 ``-f`` 指定这个文件，例如::
 
+    cd /home/jondy/myapp
     btarmor make -f files.list
 
 默认情况下生成的新文件会保存在另外一个输出目录 ``dist`` ，使用选项 ``--output``
 可以指定输出目录。
-
-``-f`` 也可以指定压缩包里面的路径，来选择压缩包里面的文件。例如::
-
-    btarmor make -f tarfile.list foo-1.0.tar.gz
-
-``btamake`` 也可以直接处理一个未签名的 Debian 包。例如::
-
-    btarmor make foo_2.31-2_aarch64.deb
 
 如果指定了选项 ``--inplace`` ，那么输出文件会直接覆盖原来的文件。
 
@@ -145,7 +123,7 @@ btarmor make
 
 * 只转换两个动态库文件，转换之后直接覆盖原来的文件::
 
-    btarmor make -i dist/foo.so dist/too.so
+    btarmor make -i dist/*.so
 
 * 没有使用任何内核服务的程序，对内存堆和运行栈也进行保护::
 
@@ -212,7 +190,7 @@ btarmor patch
 
 .. code-block:: console
 
-    btarmor patch <options> VERSION
+    btarmor patch <options>
 
 选项
 ~~~~
@@ -225,10 +203,6 @@ btarmor patch
 直接下载和当前系统内核版本相同的补丁，保存到目录 `patches/`::
 
   btarmor patch
-
-下载指定内核版本 `5.10.73`::
-
-  btarmor patch 5.10.73
 
 查看所有支持的内核版本的补丁::
 

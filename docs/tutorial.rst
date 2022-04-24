@@ -12,8 +12,8 @@ Bootarmor 提供了命令行工具 :ref:`btarmor` ，可以帮助用户完成大
 启动任意 Debian Linux 系统之后，使用下面的方式增加安装源之后，就可以使用常用的管
 理命令 `apt` 命令安装 Bootarmor 提供的各种包::
 
-    wget -O - https://btarmor.dashingsoft.com/apt/debian/dashingsoft-btarmor.gpg \
-         | sudo apt-key add -
+    wget -O /etc/apt/trusted.gpg.d/btarmor-archive-keyring.gpg \
+         https://btarmor.dashingsoft.com/apt/debian/btarmor-archive-keyring.gpg
 
     sudo echo "https://btarmor.dashingsoft.com/apt/debian bullseye contrib" \
               > /etc/apt/sources.list.d/btarmor.list
@@ -29,6 +29,11 @@ Bootarmor 提供了命令行工具 :ref:`btarmor` ，可以帮助用户完成大
     btarmor -v
 
 安装成功的话，会显示相关的版本信息。
+
+使用下面的命令清除 btarmor 相关的安装源配置::
+
+    sudo rm /etc/apt/trusted.gpg.d/btarmor-archive-keyring.gpg \
+            /etc/apt/sources.list.d/btarmor.list
 
 安装安全操作系统
 ----------------
