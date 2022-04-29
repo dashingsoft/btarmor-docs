@@ -108,19 +108,22 @@ Debian Packages
 
 btarmor 提供了下列 Debian 包
 
-1. 用于替换原来的 Linux 内核包
-   * linux-image-xxx-btarmor
-   * raspberrypi-btarmor
-   * linux-image-$VERSION-btarmor (替换原来的 linux-image-$VERSION-generic)
-   * linux-modules-$VERSION-btarmor (替换原来的 linux-modules-$VERSION-generic)
-   * linux-modules-extra-$VERSION-btarmor (替换原来的 linux-modules-extra-$VERSION-generic)
-   * raspberry-btarmor (替换 raspberry pi 系统里面原来的 raspberry-kernel)
+用于替换原来的 Linux 内核包:
 
-2. 用于装载安全应用和动态库的包
-   * btarmor-runtime
+* linux-image-xxx-btarmor
+* raspberrypi-btarmor
+* linux-image-$VERSION-btarmor (替换原来的 linux-image-$VERSION-generic)
+* linux-modules-$VERSION-btarmor (替换原来的 linux-modules-$VERSION-generic)
+* linux-modules-extra-$VERSION-btarmor (替换原来的 linux-modules-extra-$VERSION-generic)
+* raspberry-btarmor (替换 raspberry pi 系统里面原来的 raspberry-kernel)
 
-3. 用于开发环境的功能包
-   * btarmor-cli 提供了命令行工具 btarmor ，大部分的开发相关的工作都可以使用这个命令完成
-   * btarmor-toolkit 提供了头文件和示例源文件，用于帮助生成具备高级保护功能的 c 应用程序
+用于装载安全应用和动态库的包
+
+* btarmor-runtime
+
+用于开发环境的功能包
+
+* btarmor-cli 提供了命令行工具 btarmor ，大部分的开发相关的工作都可以使用这个命令完成
+* btarmor-toolkit 提供了头文件和示例源文件，用于帮助生成具备高级保护功能的 c 应用程序
 
 .. include:: _common_definitions.txt

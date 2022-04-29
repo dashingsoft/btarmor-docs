@@ -3,7 +3,7 @@
 btarmor
 =======
 
-安全操作系统 `btarmor-os`_ 的命令行工具。
+安全操作系统 :ref:`btarmor-os` 的命令行工具。
 
 语法
 ----
@@ -17,7 +17,7 @@ btarmor
 
 `btarmor`_ 命令行工具主要的功能包括
 
-* 将原来的 Debian 系统升级成为安全操作系统 `btarmor-os`_
+* 将原来的 Debian 系统升级成为安全操作系统 :ref:`btarmor-os`
 * 将应用程序/动态库/数据文件转换成为加密保护的安全文件
 
 常用的子命令包括::
@@ -33,14 +33,14 @@ btarmor
 btarmor boot
 ------------
 
-子命令 ``boot`` 用于安装安全操作系统 `btarmor-os`_
+子命令 ``boot`` 用于安装安全操作系统 :ref:`btarmor-os`
 
 直接运行下面的命令会安装新的安全内核，这个命令需要使用 ``root`` 权限，一般用于初
 始化安全操作系统::
 
     sudo btarmor boot
 
-安装完成之后需要重启系统。重新启动之后，内核就升级成为安全操作系统 `btarmor-os`_
+安装完成之后需要重启系统。重新启动之后，内核就升级成为安全操作系统 :ref:`btarmor-os`
 
 下面的命令则显示安全系统的相关信息::
 
@@ -52,12 +52,12 @@ btarmor make
 ------------
 
 子命令 ``make`` 用于将可执行文件，动态库和数据文件等，转换成为 Bootarmor 保护的
-安全文件，转换后生成的文件是经过加密处理的，只能在 `btarmor-os`_ 系统上运行。
+安全文件，转换后生成的文件是经过加密处理的，只能在 :ref:`btarmor-os` 系统上运行。
 
-`btmake`_ 可以运行在 `btarmor-os`_ 系统，直接将应用程序转换成为安全应用。
+`btmake`_ 可以运行在 :ref:`btarmor-os` 系统，直接将应用程序转换成为安全应用。
 
 `btmake`_ 也可以运行在普通的 Linux 系统，将应用程序转换成为安全应用，然后再把安
-全应用发布到 `btarmor-os`_ 系统中。
+全应用发布到 :ref:`btarmor-os` 系统中。
 
 语法
 ~~~~
@@ -212,7 +212,7 @@ btarmor patch
 
   btarmor patch --list
 
-也可以从下面的链接查看和下载对应版本的 `btarmor-os`_ 补丁
+也可以从下面的链接查看和下载对应版本的 :ref:`btarmor-os` 补丁
 
     https://btarmor.dashingsoft.com/kernel/patches/
 
