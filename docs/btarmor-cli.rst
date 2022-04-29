@@ -44,7 +44,7 @@ btarmor boot
 
 下面的命令则显示安全系统的相关信息::
 
-    btarmor boot status
+    btarmor boot --status
 
 .. _btmake:
 
@@ -119,7 +119,7 @@ btarmor make
 
 * 转换目录 ``foo`` 下面的所有文件，保存生成的安全文件到到默认输出目录 ``dist``::
 
-    btarmor make foo/
+    btarmor make foo/*
 
 * 只转换两个动态库文件，转换之后直接覆盖原来的文件::
 
@@ -190,7 +190,7 @@ btarmor patch
 
 .. code-block:: console
 
-    btarmor patch <options>
+    btarmor patch <options> [VERSION]
 
 选项
 ~~~~
@@ -203,6 +203,10 @@ btarmor patch
 直接下载和当前系统内核版本相同的补丁，保存到目录 `patches/`::
 
   btarmor patch
+
+下载应用于内核版本 `5.10.73` 的补丁::
+
+  btarmor patch 5.10.73
 
 查看所有支持的内核版本的补丁::
 
