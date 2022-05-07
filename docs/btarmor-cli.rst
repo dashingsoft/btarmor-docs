@@ -28,7 +28,7 @@ btarmor
 
 运行 ``btarmor <command> -h`` 可以查看各个命令的详细使用方法。
 
-.. _btboot:
+.. _btarmor boot:
 
 btarmor boot
 ------------
@@ -46,7 +46,7 @@ btarmor boot
 
     btarmor boot --status
 
-.. _btmake:
+.. _btarmor make:
 
 btarmor make
 ------------
@@ -54,10 +54,11 @@ btarmor make
 子命令 ``make`` 用于将可执行文件，动态库和数据文件等，转换成为 Bootarmor 保护的
 安全文件，转换后生成的文件是经过加密处理的，只能在 :ref:`btarmor-os` 系统上运行。
 
-`btmake`_ 可以运行在 :ref:`btarmor-os` 系统，直接将应用程序转换成为安全应用。
+`btarmor make`_ 可以运行在 :ref:`btarmor-os` 系统，直接将应用程序转换成为安全应
+用。
 
-`btmake`_ 也可以运行在普通的 Linux 系统，将应用程序转换成为安全应用，然后再把安
-全应用发布到 :ref:`btarmor-os` 系统中。
+`btarmor make`_ 也可以运行在普通的 Linux 系统，将应用程序转换成为安全应用，然后
+再把安全应用发布到 :ref:`btarmor-os` 系统中。
 
 语法
 ~~~~
@@ -141,7 +142,7 @@ btarmor make
 
     sudo btarmor make -i -sys /usr/bin/ls
 
-.. _btdeploy:
+.. _btarmor deploy:
 
 btarmor deploy
 --------------
@@ -160,8 +161,8 @@ btarmor deploy
 选项
 ~~~~
 
--es, --enable-senior		安全内核使用高级模式
--ee, --enable-exclusive		安全内核使用专用模式
+-s, --senior		安全内核使用高级模式
+-e, --exclusive		安全内核使用专用模式
 
 描述
 ~~~~
@@ -169,16 +170,16 @@ btarmor deploy
 在产品准备交付给用户之前，需要使用该命令把内核功能进行加壳固化，清理开发辅助的文
 件等。
 
-选项 ``--enable-senior`` 可以启用安全内核的高级模式。启用高级模式之后， Linux 内
-核将不能访问安全应用的内存，如果需要访问，必须得到安全应用的授权。这样能提高安全
-性，但是也需要更多的了解操作系统的内存管理，ELF文件的组成，以及编译器的工作原理
-等相关知识。否则，安全应用可能无法正常运行。
+选项 ``--senior`` 可以启用安全内核的高级模式。启用高级模式之后，Linux内核将不能
+访问安全应用的内存，如果需要访问，必须得到安全应用的授权。这样能提高安全性，但是
+也需要更多的了解操作系统的内存管理，ELF文件的组成，以及编译器的工作原理等相关知
+识。否则，安全应用可能无法正常运行。
 
-选择 ``--enable-exclusive`` 可以启用安全内核的专用模式。启用专用模式之后，则普通
-可执行文件，包括系统命令都无法执行，只有加密后的安全应用可以运行，这样可以进一步
-提高安全行。
+选项 ``--exclusive`` 可以启用安全内核的专用模式。启用专用模式之后，则普通可执行
+文件，包括系统命令都无法执行，只有加密后的安全应用可以运行，这样可以进一步提高安
+全行。
 
-.. _btpatch:
+.. _btarmor patch:
 
 btarmor patch
 -------------
