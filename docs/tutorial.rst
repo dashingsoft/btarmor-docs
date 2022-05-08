@@ -51,7 +51,7 @@ Bootarmor 提供了命令行工具 :ref:`btarmor` ，可以帮助用户完成大
 
 如果对 Python 比较熟悉，可以直接使用下面的命令安装::
 
-    pip install btarmor-cli
+    pip install https://btarmor.dashingsoft.com/tools/btarmor-cli-1.0.1.tar.gz
 
 安装完成之后同样会创建命令 :ref:`btarmor`
 
