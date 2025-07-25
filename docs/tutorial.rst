@@ -71,7 +71,7 @@ Bootarmor 提供了命令行工具 :ref:`btarmor` ，可以帮助用户完成大
 
 例如，转换被保护的应用程序 ``/opt/foo`` 为安全应用::
 
-  btamor make -i /opt/foo
+  btarmor make -i /opt/foo
 
 该目录下面的所有可执行文件和动态库，以及使用到的所有系统动态库都会被转换成为安全
 应用。
